@@ -1,0 +1,255 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Variables for colors */
+:root {
+    --background-color: #e8f5e9; /* Light green background color */
+    --header-background-color: #2e7d32; /* Dark green background color */
+    --text-color: #2c6b2f; /* Dark green text color */
+    --input-background: #ffffff; /* White background for inputs */
+    --input-border-color: #2e7d32; /* Dark green border color */
+    --button-background-color: #2e7d32; /* Dark green background for buttons */
+    --button-hover-background: #1b5e20; /* Darker green for button hover */
+    --table-header-background: #2e7d32; /* Dark green background for table headers */
+    --table-row-even-background: #f1f8e9; /* Very light green for even rows */
+    --table-row-hover-background: #c8e6c9; /* Light green for row hover */
+    --track-color: #a5d6a7; /* Light green for range track */
+    --thumb-color: #2e7d32; /* Dark green for range thumb */
+}
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transition: background-color 0.5s ease;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--header-background-color);
+    color: #ffffff;
+    font-size: 36px; /* Increased font size */
+    font-weight: 700; /* Bold weight */
+    font-family: 'Roboto', sans-serif; /* Use a different font */
+    display: flex;
+    align-items: center;
+    padding: 30px; /* Increased padding for better appearance */
+    width: 100%;
+    text-align: center;
+    border-radius: 15px; /* Slightly larger border radius */
+    margin-bottom: 30px; /* Increased bottom margin */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    transition: background-color 0.5s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+/* New slider input group styles */
+.input-group {
+    position: relative;
+}
+
+/* Calculator Styles */
+.calculator {
+    background-color: var(--input-background);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+    gap: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.calculator:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Row and Column Styles */
+.row {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.column {
+    width: 50%;
+}
+
+.flex-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Input and Label Styles */
+input, label {
+    display: block;
+}
+
+input[type=number] {
+    width: 70%; /* Make input width larger */
+    padding: 7px; /* Increase padding */
+    text-align: center;
+    color: var(--text-color);
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid var(--input-border-color);
+    border-radius: 7px;
+    background-color: var(--input-background);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    -moz-appearance: textfield; /* Remove spin buttons in Firefox */
+    -webkit-appearance: none; /* Remove spin buttons in WebKit browsers */
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Remove spin buttons in WebKit browsers */
+    margin: 0; /* Remove margin */
+}
+
+input[type=number]:focus {
+    outline: none;
+    border-color: #1b5e20;
+    background-color: #dcedc8;
+}
+
+/* Table Styles */
+.table-container {
+    margin: 20px auto;
+    background-color: var(--input-background);
+    width: 80%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #c8e6c9;
+    padding: 10px;
+    text-align: right;
+}
+
+th {
+    background-color: var(--table-header-background);
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: var(--table-row-even-background);
+}
+
+tr:hover {
+    background-color: var(--table-row-hover-background);
+}
+
+/* Range Input Styles */
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: var(--track-color);
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    height: 8px;
+    background: var(--track-color);
+    border-radius: 5px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--thumb-color);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    position: relative;
+    z-index: 1;
+}
+
+input[type=range]::-moz-range-track {
+    height: 8px;
+    background: var(--track-color);
+    border-radius: 5px;
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--thumb-color);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 8px;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+    background: var(--track-color);
+    border-radius: 5px;
+}
+
+input[type=range]::-ms-fill-upper {
+    background: #e8f5e9;
+    border-radius: 5px;
+}
+
+input[type=range]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--thumb-color);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+}
+
+.chart-container {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Add some space between charts */
+}
+
+canvas {
+    flex: 1; /* Allow canvas to grow and fit container */
+    max-width: 100%; /* Ensure canvas does not overflow container */
+    max-height: 500px;
+    border: 1px solid #ccc; /* Optional: add a border for visibility */
+    padding: 20px;
+    border-radius: 10px;
+}
+

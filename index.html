@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return On Investment Calculator</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        Return On Investment Calculator
+    </div>
+    <div class="calculator">
+        <!-- Existing sliders -->
+        <div class="input-group">
+            <div class="row">
+                <div class="column">
+                    <label for="premium-input">Monthly Premium</label>
+                </div>
+                <div class="column flex-right">
+                    <input type="number" id="premium-input">
+                </div>
+            </div>
+            <div class="row">
+                <input type="range" id="premium-range">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="row">
+                <div class="column">
+                    <label for="duration-input">Duration (in years)</label>
+                </div>
+                <div class="column flex-right">
+                    <input type="number" id="duration-input">
+                </div>
+            </div>
+            <div class="row">
+                <input type="range" id="duration-range">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="row">
+                <div class="column">
+                    <label for="interest-input">Interest Rate (%)</label>
+                </div>
+                <div class="column flex-right">
+                    <input type="number" id="interest-input">
+                </div>
+            </div>
+            <div class="row">
+                <input type="range" id="interest-range">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="row">
+                <div class="column">
+                    <label for="inflation-input">Annual Inflation Rate (%)</label>
+                </div>
+                <div class="column flex-right">
+                    <input type="number" id="inflation-input">
+                </div>
+            </div>
+            <div class="row">
+                <input type="range" id="inflation-range">
+            </div>
+        </div>
+        <!-- New Expected Return slider -->
+        <div class="input-group">
+            <div class="row">
+                <div class="column">
+                    <label for="expected-return-input">Expected Return (in ₹)</label>
+                </div>
+                <div class="column flex-right">
+                    <input type="number" id="expected-return-input">
+                </div>
+            </div>
+            <div class="row">
+                <input type="range" id="expected-return-range">
+            </div>
+        </div>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Annual Investment</th>
+                    <th>Interest</th>
+                    <th>Invested Amount</th>
+                    <th>Estimated Returns</th>
+                    <th>Total Value</th>
+                    <th>Inflation-Adjusted Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Calculation results will be injected here -->
+            </tbody>
+        </table>
+    </div>
+    <div class="chart-container">
+        <canvas id="line-chart"></canvas>
+        <canvas id="doughnut-chart" style="width:400px"></canvas>
+    </div>    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
