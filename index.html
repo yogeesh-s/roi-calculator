@@ -16,7 +16,7 @@
         <div class="input-group">
             <div class="row">
                 <div class="column">
-                    <label for="premium-input">Monthly Premium</label>
+                    <label for="premium-input">Monthly Premium (in ₹)</label>
                 </div>
                 <div class="column flex-right">
                     <input type="number" id="premium-input">
@@ -86,11 +86,12 @@
                 <tr>
                     <th>Year</th>
                     <th>Annual Investment</th>
-                    <th>Interest</th>
                     <th>Invested Amount</th>
-                    <th>Estimated Returns</th>
+                    <th>Interest</th>
                     <th>Total Value</th>
-                    <th>Inflation-Adjusted Value</th>
+                    <th>Inflation-Adjusted Total Value</th>
+                    <th>Expected Value</th>
+                    <th>Inflation-Adjusted Expected Value</th>
                 </tr>
             </thead>
             <tbody>
@@ -100,7 +101,7 @@
     </div>
     <div class="chart-container">
         <canvas id="line-chart"></canvas>
-        <canvas id="doughnut-chart" style="width:400px"></canvas>
+        <canvas id="doughnut-chart"></canvas>
     </div>    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>

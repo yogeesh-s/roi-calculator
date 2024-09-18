@@ -40,7 +40,7 @@ function formatIndianCurrency(amount) {
         lastThree = ',' + lastThree;
     }
     integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThree;
-    return `₹ ${integerPart}`;
+    return `₹${integerPart}`;
 }
 
 // Calculate and populate table data
@@ -52,12 +52,13 @@ function calculate() {
     let premium = Number(document.querySelector('#premium-input').value);
     let duration = Number(document.querySelector('#duration-input').value);
     let inflationRate = Number(document.querySelector('#inflation-input').value) / 100;
+    let expectedReturn = Number(document.querySelector('#expected-return-input').value);
 
     for (let i = 0; i < duration; i++) {
         const tr = document.createElement('tr');
         const td = [];
 
-        for (let j = 0; j < 7; j++) {
+        for (let j = 0; j < 8; j++) {
             td[j] = document.createElement('td');
         }
 
@@ -71,21 +72,26 @@ function calculate() {
         let maturity = Math.round((premium * ((Math.pow((1 + interestRate), (12 * (i + 1))) - 1) / interestRate) * (1 + interestRate)));
         let interest = maturity - (annualPremium * (i + 1));
 
-        td[2].innerHTML = formatIndianCurrency(interest);
+        td[2].innerHTML = formatIndianCurrency(annualPremium * (i + 1));
         tr.appendChild(td[2]);
 
-        td[3].innerHTML = formatIndianCurrency(annualPremium * (i + 1));
+        td[3].innerHTML = formatIndianCurrency(interest);
         tr.appendChild(td[3]);
 
-        td[4].innerHTML = formatIndianCurrency(interest);
+        td[4].innerHTML = formatIndianCurrency(maturity);
         tr.appendChild(td[4]);
 
-        td[5].innerHTML = formatIndianCurrency(maturity);
+        let inflationAdjustedMaturity = maturity / Math.pow(1 + inflationRate, i + 1);
+        td[5].innerHTML = formatIndianCurrency(inflationAdjustedMaturity);
         tr.appendChild(td[5]);
 
-        let inflationAdjustedMaturity = maturity / Math.pow(1 + inflationRate, i + 1);
-        td[6].innerHTML = formatIndianCurrency(inflationAdjustedMaturity);
+        
+        td[6].innerHTML = formatIndianCurrency(expectedReturn);
         tr.appendChild(td[6]);
+
+        let inflationAdjustedReturn = expectedReturn / Math.pow(1 + inflationRate, i + 1)
+        td[7].innerHTML = formatIndianCurrency(inflationAdjustedReturn);
+        tr.appendChild(td[7]);
 
         tbody.appendChild(tr);
     }
@@ -104,8 +110,10 @@ function updateCharts() {
     let investmentData = [];
     let returnData = [];
     let expectedReturn = [];
+    let totalValue = [];
     
     for (let i = 0; i <= duration; i++) {
+        
         // Total investment made till year i
         let cumulativeInvestment = premium * 12 * i;
         investmentData.push(cumulativeInvestment);
@@ -117,15 +125,17 @@ function updateCharts() {
 
         // Calculate returns for year i
         let returns = maturity - cumulativeInvestment;
+        totalValue.push(maturity)
         returnData.push(returns);
         expectedReturn.push(Number(expectedReturnIinput.value))
     }
     // Update Line Chart
     if (lineChart) {
         lineChart.data.labels = years;
-        lineChart.data.datasets[0].data = investmentData;
-        lineChart.data.datasets[1].data = returnData;
-        lineChart.data.datasets[2].data = expectedReturn;
+        lineChart.data.datasets[0].data = totalValue;
+        lineChart.data.datasets[1].data = investmentData;
+        lineChart.data.datasets[2].data = returnData;
+        lineChart.data.datasets[3].data = expectedReturn;
         lineChart.update();
     } else {
         lineChart = new Chart(ctxLine, {
@@ -134,26 +144,33 @@ function updateCharts() {
                 labels: years,
                 datasets: [
                     {
-                        label: 'Investment Over Time',
-                        data: investmentData,
-                        borderColor: '#2e7d32',
-                        backgroundColor: 'rgba(46, 125, 50, 0.2)',
+                        label: 'Total Value',
+                        data: totalValue,
+                        borderColor: '#1B5E20', // Medium Green
+                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
                         fill: true,
                     },
                     {
-                        label: 'Estimated Returns Over Time',
+                        label: 'Investment Over Time',
+                        data: investmentData,
+                        borderColor: '#4CAF50', // Light Green
+                        backgroundColor: 'rgba(129, 199, 132, 0.2)',
+                        fill: true,
+                    },
+                    {
+                        label: 'Intrest Over Time',
                         data: returnData,
-                        borderColor: '#1b5e20',
-                        backgroundColor: 'rgba(27, 94, 32, 0.2)',
+                        borderColor: '#66BB6A', // Darker Green
+                        backgroundColor: 'rgba(56, 142, 60, 0.2)',
                         fill: true,
                     },
                     {
                         label: 'Expected Return',
                         data: expectedReturn,
-                        borderColor: '#00900a',
-                        backgroundColor: 'rgba(27, 94, 32, 0.2)',
+                        borderColor: '#388E3C', // Very Light Green
+                        backgroundColor: 'rgba(197, 225, 165, 0.2)',
                         fill: true,
-                    }
+                    }                                       
                 ]
             },
             options: {
@@ -165,7 +182,7 @@ function updateCharts() {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `${context.dataset.label}: ₹ ${context.raw.toLocaleString()}`;
+                                return `${context.dataset.label}: ${formatIndianCurrency(context.raw)}`;
                             }
                         }
                     }
@@ -213,8 +230,6 @@ function updateCharts() {
 }
 
 
-
-
 // Initialize the charts
 let lineChart, doughnutChart;
 const ctxLine = document.getElementById('line-chart').getContext('2d');
@@ -229,5 +244,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     calculate(); // Run initial calculation to populate the table
     updateCharts(); // Initialize charts with example data
-
 });

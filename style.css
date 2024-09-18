@@ -64,7 +64,7 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 450px;
     margin: 0 auto;
     gap: 20px;
     border-radius: 20px;
@@ -163,77 +163,58 @@ tr:hover {
 }
 
 /* Range Input Styles */
-input[type=range] {
+input[type="range"] {
+    /* removing default appearance */
     -webkit-appearance: none;
+    appearance: none; 
+    /* creating a custom design */
     width: 100%;
-    height: 8px;
-    background: var(--track-color);
-    border-radius: 5px;
     cursor: pointer;
-    margin: 0;
+    outline: none;
+    /*  slider progress trick  */
+    overflow: hidden;
+    border-radius: 16px;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
-    height: 8px;
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 15px;
     background: var(--track-color);
-    border-radius: 5px;
+    border-radius: 16px;
 }
 
-input[type=range]::-webkit-slider-thumb {
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+    height: 15px;
+    background: var(--track-color);
+    border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
     -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    background: var(--thumb-color);
+    appearance: none; 
+    /* creating a custom design */
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
     border-radius: 50%;
-    cursor: pointer;
-    margin-top: -6px;
-    position: relative;
-    z-index: 1;
+    border: 2px solid var(--thumb-color);
+    /*  slider progress trick  */
+    box-shadow: -407px 0 0 400px var(--thumb-color);
 }
 
-input[type=range]::-moz-range-track {
-    height: 8px;
-    background: var(--track-color);
-    border-radius: 5px;
-}
 
-input[type=range]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: var(--thumb-color);
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
     border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-}
-
-input[type=range]::-ms-track {
-    width: 100%;
-    height: 8px;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-}
-
-input[type=range]::-ms-fill-lower {
-    background: var(--track-color);
-    border-radius: 5px;
-}
-
-input[type=range]::-ms-fill-upper {
-    background: #e8f5e9;
-    border-radius: 5px;
-}
-
-input[type=range]::-ms-thumb {
-    width: 20px;
-    height: 20px;
-    background: var(--thumb-color);
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    margin-top: 0;
+    border: 1px solid var(--thumb-color);
+    /*  slider progress trick  */
+    box-shadow: -407px 0 0 400px var(--thumb-color);
 }
 
 .chart-container {
