@@ -18,7 +18,7 @@ function setupInputRangeSync(inputSelector, rangeSelector, minValue, maxValue, i
         range.value = value;
     }
 
-    input.addEventListener('input', () => {
+    input.addEventListener('change', () => {
         updateValues();
         calculate();
         updateCharts();
