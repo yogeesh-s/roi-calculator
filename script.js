@@ -219,7 +219,7 @@ function updateCharts() {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `${context.label}: ₹ ${context.raw.toLocaleString()}`;
+                                return `${context.label}:  ${formatIndianCurrency(context.raw)}`;
                             }
                         }
                     }
